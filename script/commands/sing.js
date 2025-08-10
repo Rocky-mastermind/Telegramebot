@@ -50,8 +50,8 @@ module.exports = {
       const videoId = topResult.videoId;
       const songTitle = topResult.title;
 
-      const apiKey = global.config.youtubeApiKey || "itzaryan";
-      const apiUrl = `https://noobs-xyz-aryan.vercel.app/youtube?id=${videoId}&type=${downloadType}&apikey=${apiKey}`;
+      const apiKey = global.config.youtubeApiKey;
+      const apiUrl = `${global.api.sing}/youtube?id=${videoId}&type=${downloadType}&apikey=${apiKey}`;
 
       await bot.editMessageText(`⏳ Found "${songTitle}". Downloading...`, {
         chat_id: msg.chat.id,
