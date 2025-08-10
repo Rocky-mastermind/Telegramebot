@@ -17,7 +17,7 @@ module.exports = {
   vip: false,
 
   async xyz({ bot, chat, msg, args, chatId, userId, config }) {
-    const apiKey = "itzaryan";
+    const apiKey = global.config.youtubeApiKey;
     let type = "video";
     let videoId, topResult;
 
