@@ -99,7 +99,7 @@ module.exports = {
         throw new Error(`❌ This video is too long (${timestamp}). Max 10 minutes allowed.`);
       }
 
-      const apiUrl = `https://noobs-xyz-aryan.vercel.app/youtube?id=${videoId}&type=${type}&apikey=${apiKey}`;
+      const apiUrl = `${global.api.sing}/youtube?id=${videoId}&type=${type}&apikey=${apiKey}`;
       const { data } = await axios.get(apiUrl);
 
       if (!data || !data.downloadUrl) {
