@@ -1,7 +1,7 @@
 {
   "name": "xyz-tgbot",
   "version": "1.0.0",
-  "description": "A Telegram bot built with node-telegram-bot-api",
+  "description": "A Telegram bot built with ArYAN",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -10,6 +10,7 @@
   "keywords": [
     "telegram",
     "bot",
+    "telegram chat bot",
     "node-telegram-bot-api"
   ],
   "author": "itz Aryan",
