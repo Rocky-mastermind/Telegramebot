@@ -1,56 +1,43 @@
-const axios = require('axios');
 const { alldown } = require('aryan-videos-downloader');
 
 module.exports = {
-  name: "alldown",
-  aliases: ["alldl", "dl", "down"],
-  prefix: true,
+  name: "downloader",
+  aliases: [],
+  prefix: false,
   admin: false,
   vip: false,
   author: "ArYAN",
-  version: "0.0.1",
-  description: "Download video from a given URL.",
+  version: "0.0.2",
+  description: "Auto-detect URL and download video.",
   
-  async xyz({ chat, msg, args }) { 
-    const inputLink = args[0];
-
-    if (!inputLink) {
-      return chat.reply('❌ *Input Link!* Example: `/alldl <link>`');
-    }
-
-    const waitMsg = await chat.reply('⏳ Processing your request...');
-
+  async xyz({ chat, msg }) { 
+    const text = msg.text || "";
+    const urlRegex = /(https?:\/\/[^\s]+)/gi;
+    const match = text.match(urlRegex);
+    if (!match) return;
+    const inputLink = match[0];
+    const waitMsg = await chat.reply('⏳ Processing your link...');
     try {
       const apis = await alldown(inputLink);
       if (!apis || !apis.data || !apis.data.high || !apis.data.title) {
         throw new Error("Invalid response from downloader API.");
       }
-      
       const { high, title } = apis.data;
-
-      const caption = `🎬 *Title:* ${title}`;
-      
       await chat.sendVideo(
         { 
           video: high,
-          caption: caption,
+          caption: `🎬 *Title:* ${title}`,
           parse_mode: 'Markdown',
         },
         { 
-          reply_to_message_id: msg.message_id,
-          reply_markup: {
-            inline_keyboard: [
-              [{ text: '🔗 Bot Owner', url: 'https://t.me/ArYANAHMEDRUDRO' }],
-            ],
-          },
+          reply_to_message_id: msg.message_id
         }
       );
-
     } catch (error) {
-      console.error('Error in alldown command:', error.message);
-      await chat.reply('❌ An error occurred while processing your request. Please check the link or try again later.');
+      console.error('Downloader error:', error.message);
+      await chat.reply('❌ Could not download this link. Please try another.');
     } finally {
-      if (waitMsg && waitMsg.message_id) {
+      if (waitMsg?.message_id) {
         await chat.xyz(waitMsg);
       }
     }
