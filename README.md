@@ -40,7 +40,7 @@ npm install
 
 Open config.json and add your Telegram bot token:
 
-```
+```json
 {
   "token": "YOUR_BOT_TOKEN"
 }
