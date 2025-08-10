@@ -17,7 +17,7 @@ module.exports = {
   vip: false,
 
   async xyz({ bot, chat, msg, args, chatId, userId, config }) {
-    const apiKey = global.config.youtubeApiKey;
+    const apiKey = "itzaryan";
     let type = "video";
     let videoId, topResult;
 
@@ -99,7 +99,7 @@ module.exports = {
         throw new Error(`❌ This video is too long (${timestamp}). Max 10 minutes allowed.`);
       }
 
-      const apiUrl = `${global.api.sing}/youtube?id=${videoId}&type=${type}&apikey=${apiKey}`;
+      const apiUrl = `https://xyz-nix.vercel.app/aryan/youtube?id=${videoId}&type=${type}&apikey=${apiKey}`;
       const { data } = await axios.get(apiUrl);
 
       if (!data || !data.downloadUrl) {
